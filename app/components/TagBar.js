@@ -29,11 +29,10 @@ const TAGS = [ 'social', 'economic', 'technical' ];
 
 
 const TagBar = (props) => {
-  const {editorState, onToggle} = props
+  const {editorState, onToggle, selectedTags} = props
 
   const isActive = (tag) => {
-    //return false;
-    return helpers.getHighlightTags(editorState).includes(tag);
+    return selectedTags.includes(tag);
   };
   return (
     <div>
@@ -41,7 +40,7 @@ const TagBar = (props) => {
       tag={tag}
       active={isActive(tag)}
       label={tag}
-      onToggle={onToggle}
+      onToggle={() => onToggle(tag)}
       key={index}
       />
     )}

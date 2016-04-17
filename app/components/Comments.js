@@ -7,23 +7,25 @@ import CommentList from './CommentList'
 
 import { fetchComments, addComment } from '../actions/comments';
 
-class Comments extends Component {
-  constructor(props) {
-    super(props);
+const getCommentIds = (editor) => {
+  const data =  editor.selectedEntity !== null ? Entity.get(editor.selectedEntity).getData() : {};
+  if (data.comments) {
+    return data.comments;
   }
+  return [];
+}
 
-  render() {
-    const { comments, onAdd, username, showAddComment } = this.props;
-    return (
-      <div>
-      <h3>Comments</h3>
-      <CommentList comments={comments.comments}/>
-      { showAddComment &&
-        <AddComment onAdd={(comment) => onAdd(username, comment)} />
-      }
-      </div>
-    );
-  }
+const Comments = ({ comments, onAddComment, showAddComment }) => {
+  console.log('Comments render', comments)
+  return (
+    <div>
+    <h3>Comments</h3>
+    <CommentList comments={comments}/>
+    { showAddComment &&
+      <AddComment onAdd={onAddComment} />
+    }
+    </div>
+  );
 }
 
 Comments.propTypes = {
@@ -37,14 +39,14 @@ Comments.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    comments: state.comments
+    showAddComment: (state.editor.selectedEntity !== null),
+    comments: state.comments.items, //.filter((comment) => { getCommentIds(state.editor).includes(comment._id)}),
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchComments: () => dispatch(fetchComments()),
-    onAdd: (username, comment) => dispatch(addComment(username, comment)),
+    fetchComments: () => dispatch(fetchComments())
   };
 }
 

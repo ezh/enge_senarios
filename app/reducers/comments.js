@@ -1,8 +1,8 @@
-import { ADD_COMMENT, FETCH_COMMENTS, REQUEST_COMMENTS, RECEIVE_COMMENTS, REQUEST_POST } from '../actions/comments';
+import { ADD_COMMENT, POST_COMMENT, FETCH_COMMENTS, REQUEST_COMMENTS, RECEIVE_COMMENTS, REQUEST_POST } from '../actions/comments';
 
-const comments = (state = {
+export const comments = (state = {
   isFetching: false,
-  comments: [],
+  items: [],
   lastUpdate: null
 }, action) => {
   switch(action.type) {
@@ -16,12 +16,16 @@ const comments = (state = {
         comments: action.comments,
         lastUpdate: action.receivedAt
       });
-    case REQUEST_POST:
-      let comment = action.comment;
-      comment.synced = false;
+    case ADD_COMMENT:
+      const comment = {
+        synced: false,
+        comment: action.comment
+      };
       return Object.assign({}, state, {
-        comments: [...state.comments, comment]
+        items: [...state.items, comment]
       });
+    case POST_COMMENT:
+      console.log('POST_COMMENT', action)
     default:
       return state;
   }

@@ -15,23 +15,21 @@ export const REQUEST_SCENARIO = 'REQUEST_SCENARIO';
 export const RECEIVE_SCENARIO = 'RECEIVE_SCENARIO';
 export const UPDATE_REVISION = 'UPDATE_REVISION';
 
+import {setContent} from './editor'
+
 export function addScenario(username, scenario) {
   return function(dispatch) {
     const data = {
       author: username,
       title: scenario
     };
+    // dispatch(saving...)
     helpers.postScenario(data).then(data => {
       console.log('postScenario respone', data);
       if (data.status === 201) {
         dispatch(fetchScenarios());
       }
     })
-  }
-  return {
-    type: ADD_SCENARIO,
-    username: username,
-    scenario: scenario
   }
 }
 
@@ -99,10 +97,16 @@ export function requestScenario() {
 }
 
 export function receiveScenario(json) {
+  return (dispatch) => {
+    dispatch(setScenario(json))
+    dispatch(setContent(json.content));
+  }
+}
+
+export function setScenario(json) {
   return {
     type: RECEIVE_SCENARIO,
-    scenario: json,
-    receivedAt: Date.now()
+    scenario: json
   }
 }
 

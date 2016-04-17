@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+import AddComment from '../containers/AddComment'
+
 const Comment = ({author, text, replies}) => {
   return (
     <li className="media">
@@ -16,6 +18,7 @@ const Comment = ({author, text, replies}) => {
       })}
       </div>
     }
+    Reply: <AddComment />
     </div>
     </li>
   );

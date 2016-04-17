@@ -3,8 +3,7 @@ import { Link } from 'react-router';
 
 import UserSelection from './UserSelection'
 
-const Main = React.createClass({
-  render: function() {
+const Main = ({children}) => {
     return (
       <div className="main-container">
         <nav className="navbar navbar-default" role="navigation">
@@ -18,11 +17,10 @@ const Main = React.createClass({
       </div>
         </nav>
         <div className="container">
-          {this.props.children}
+          {children}
         </div>
       </div>
     )
-  }
-});
+};
 
-module.exports = Main;
+export default Main;

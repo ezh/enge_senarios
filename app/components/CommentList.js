@@ -5,8 +5,8 @@ const CommentList = ({comments}) => {
   return (
     <div>
     <ol className="media-list">
-    {comments.map(comment =>
-      <Comment key={comment._id} author={comment.author} text={comment.text} />
+    {comments.map((comment,index) =>
+      <Comment key={comment.comment._id ? comment.comment_id : index} author={comment.comment.author} text={comment.comment.text} />
     )}
     </ol>
     </div>
