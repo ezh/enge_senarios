@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { onChange, addHighlight } from '../actions/editor';
 
 import TagBar from './TagBar';
-import helpers from '../utils/helpers';
 
 class DisplayEditor extends React.Component {
   constructor(props) {

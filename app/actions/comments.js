@@ -1,4 +1,4 @@
-import helpers from '../utils/helpers'
+import { postComment } from '../utils/helpers'
 
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const REQUEST_COMMENTS = 'REQUEST_COMMENTS';
@@ -25,6 +25,13 @@ export function onNewComment(comment) {
     console.log('onNewComment', comment);
     //helpers.putComment(username, text)
     dispatch(addComment(comment));
+    postComment(comment).then(data => {
+      console.log('post comment respone', data);
+      if (data.status === 201) {
+        //dispatch(commentSaved());
+      }
+    })
+
     //do ajax, on success dispatch(commentSaved())
   }
 }

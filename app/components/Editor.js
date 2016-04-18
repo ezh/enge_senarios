@@ -10,7 +10,6 @@ import { updateScenario, fetchScenario } from '../actions/scenarios'
 import { entityChange } from '../actions/editor'
 import { onNewComment } from '../actions/comments'
 
-import helpers from '../utils/helpers'
 
 class Editor extends React.Component{
   constructor(props) {
@@ -37,7 +36,7 @@ class Editor extends React.Component{
   _handleAddComment(text) {
     const { scenario, username, editor, addComment } = this.props;
     const comment = {
-      docid: scenario._id,
+      parent_id: scenario._id,
       entitykey: editor.selectedEntity,
       author: username,
       text: text,
@@ -75,7 +74,6 @@ function mapStateToProps(state) {
   return {
     username: state.users.username,
     scenario: state.scenario.scenario,
-    comments: state.comments,
     editor: state.editor
   };
 }

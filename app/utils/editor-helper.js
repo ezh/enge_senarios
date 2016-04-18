@@ -47,3 +47,29 @@ export const decorator = new CompositeDecorator([
     component: Highlight
   }
 ]);
+
+// Helpers for draft-js, maybe best in separate file
+export function getEntityKey(editorState) {
+  const selectionState = editorState.getSelection();
+  const startKey = selectionState.getStartKey();
+  const key = editorState
+    .getCurrentContent()
+    .getBlockForKey(startKey).getEntityAt(selectionState.getStartOffset());
+  return key;
+}
+
+export function getHighlightTags(editorState) {
+  let tags = [];
+  const key = getEntityKey(editorState);
+  if (key) {
+    const data = Entity.get(key).getData();
+    if (data.tags) {
+      tags = data.tags;
+    }
+  }
+  return tags;
+}
+
+export function getHighlightComments(editorState) {
+  return ['not implemented'];
+}

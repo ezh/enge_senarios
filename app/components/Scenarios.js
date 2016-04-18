@@ -27,7 +27,6 @@ class Scenarios extends Component {
   }
 
   render() {
-    console.log('Scenarios.props', this.props);
     const { onAddScenario, onDeleteScenario, username, scenarios } = this.props
     const { isFetching, items, addScenario } = scenarios
 
@@ -52,6 +51,7 @@ Scenarios.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
+    username: state.users.username,
     scenarios: state.scenarios
   };
 }

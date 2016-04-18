@@ -19,7 +19,7 @@ class Home extends React.Component{
       <h2 className="text-center">
       Scenarios
       </h2>
-      <Scenarios username="dmaczka" {...this.props} />
+      <Scenarios {...this.props} />
       </div>
     )
   }

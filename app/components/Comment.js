@@ -18,7 +18,7 @@ const Comment = ({author, text, replies}) => {
       })}
       </div>
     }
-    Reply: <AddComment />
+    Reply: <AddComment onAdd={(comment) => console.log('add a reply', comment) }/>
     </div>
     </li>
   );

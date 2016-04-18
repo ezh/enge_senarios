@@ -21,9 +21,11 @@ export function addScenario(username, scenario) {
   return function(dispatch) {
     const data = {
       author: username,
-      title: scenario
+      title: scenario,
+      createdAt: Date.now(),
     };
     // dispatch(saving...)
+    console.log('dispatch post scenario', data);
     helpers.postScenario(data).then(data => {
       console.log('postScenario respone', data);
       if (data.status === 201) {
@@ -98,15 +100,17 @@ export function requestScenario() {
 
 export function receiveScenario(json) {
   return (dispatch) => {
-    dispatch(setScenario(json))
-    dispatch(setContent(json.content));
+    const scenario = json.rows[0].doc;
+    dispatch(setScenario(scenario, json.rows.length > 1 ? json.rows.slice(1).map(row => row.doc) : []))
+    dispatch(setContent(scenario.content));
   }
 }
 
-export function setScenario(json) {
+export function setScenario(json, comments=[]) {
   return {
     type: RECEIVE_SCENARIO,
-    scenario: json
+    scenario: json,
+    comments: comments
   }
 }
 
@@ -132,7 +136,7 @@ export function fetchScenario(id) {
 }
 
 export function storeScenario(scenario) {
-  helpers.postScenario(scenario).
+  postScenario(scenario).
     then((data) => {
       console.log('storeScenario', data)
     })

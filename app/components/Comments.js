@@ -34,13 +34,14 @@ Comments.propTypes = {
     author: PropTypes.string.isRequired,
     text: PropTypes.string,
     syncing: PropTypes.bool.isRequired
-  }).isRequired).isRequired
+  })).isRequired
 }
 
 const mapStateToProps = (state) => {
+  console.log('comments stateToProps state', state)
   return {
     showAddComment: (state.editor.selectedEntity !== null),
-    comments: state.comments.items, //.filter((comment) => { getCommentIds(state.editor).includes(comment._id)}),
+    comments: (state.scenario.comments ? state.scenario.comments : []).filter(comment => comment.entitykey === state.editor.selectedEntity), //.filter((comment) => { getCommentIds(state.editor).includes(comment._id)}),
   };
 }
 

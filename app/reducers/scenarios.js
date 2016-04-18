@@ -15,6 +15,7 @@ export const scenario = (state = {
       return Object.assign({}, state, {
         isFetching: false,
         scenario: action.scenario,
+        comments: action.comments,
         lastUpdated: action.receivedAt
       });
       break;
