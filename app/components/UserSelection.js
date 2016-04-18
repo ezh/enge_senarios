@@ -27,7 +27,6 @@ UserSelection.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  console.log('UserSelection state', state);
   return {
     username: state.users.username,
     users: state.users.users

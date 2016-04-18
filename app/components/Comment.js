@@ -9,6 +9,7 @@ import { makeComment } from '../utils/comment-helpers'
 import { onNewComment } from '../actions/comments'
 
 const NestedComment = ({author, text, id}) => {
+  console.log('nested comment', author, text)
   return (
     <div className="media">
       <div className="media-left">
@@ -21,7 +22,7 @@ const NestedComment = ({author, text, id}) => {
   );
 }
 
-const Comment = ({author, text, comments, ancestors, canReply, addComment, id }) => {
+const Comment = ({username, author, text, comments, ancestors, canReply, addComment, id }) => {
   const replies = comments.filter(comment => comment.ancestors.includes(id));
   return (
     <li className="media">
@@ -38,7 +39,7 @@ const Comment = ({author, text, comments, ancestors, canReply, addComment, id })
       )}
       </div>
     }
-    { canReply && <AddComment onAdd={(comment) => addComment(makeComment(comment, author, ancestors)) }/> }
+    { canReply && <AddComment onAdd={(comment) => addComment(makeComment(comment, username, ancestors)) }/> }
     </div>
     </li>
   );
@@ -46,7 +47,7 @@ const Comment = ({author, text, comments, ancestors, canReply, addComment, id })
 
 const mapStateToProps = (state) => {
   return {
-    author: state.users.username,
+    username: state.users.username,
     comments: state.scenario.comments
   }
 }

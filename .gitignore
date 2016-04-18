@@ -1,4 +1,5 @@
 couchapp/_attachments/bundle.js
+app/config.js
 node_modules/*
 public/bundle.js
 *~
