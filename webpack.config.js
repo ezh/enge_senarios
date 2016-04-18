@@ -1,7 +1,7 @@
 module.exports = {
   entry: "./app/App.js",
   output: {
-    filename: "couchapp/bundle.js"
+    filename: "couchapp/_attachments/bundle.js"
   },
   module: {
     loaders: [

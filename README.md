@@ -5,6 +5,7 @@
 This application runs on CouchDB, get that installed first.
 
 ~~~~~ shell
-$ cd couchapp
-$ couchapp push . enge_scenarios
+$ npm install
+$ webpack # install webpack if necessary: npm install -g webpack
+$ couchapp push couchapp enge_scenarios
 ~~~~~
