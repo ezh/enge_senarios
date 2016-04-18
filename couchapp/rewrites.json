@@ -15,5 +15,9 @@
     {
         "from": "api/scenario_list",
         "to": "/_view/scenario_list"
+    },
+    {
+        "from": "/*",
+        "to": "/*"
     }
 ]
