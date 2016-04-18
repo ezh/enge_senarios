@@ -27,7 +27,13 @@
         "to": "/_view/scenario_list"
     },
     {
-        "from": "/*",
-        "to": "../../*"
+        "from": "/bundle.js",
+        "to": "/bundle.js",
+        "method": GET
+    },
+    {
+        "from": "/Draft.css",
+        "to": "/Draft.css",
+        "method": GET
     }
 ]
