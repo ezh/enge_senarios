@@ -1,8 +1,28 @@
 import React, { PropTypes } from 'react';
 
+import { connect } from 'react-redux'
+
 import AddComment from '../containers/AddComment'
 
-const Comment = ({author, text, replies, ancestors, canReply }) => {
+import { makeComment } from '../utils/comment-helpers'
+
+import { onNewComment } from '../actions/comments'
+
+const NestedComment = ({author, text, id}) => {
+  return (
+    <div className="media">
+      <div className="media-left">
+      </div>
+      <div className="media-body">
+        <h4 className="media-header">reply by {author}</h4>
+        <p>{text}</p>
+      </div>
+    </div>
+  );
+}
+
+const Comment = ({author, text, comments, ancestors, canReply, addComment, id }) => {
+  const replies = comments.filter(comment => comment.ancestors.includes(id));
   return (
     <li className="media">
     <div className="media-left">
@@ -11,17 +31,30 @@ const Comment = ({author, text, replies, ancestors, canReply }) => {
     <div className="media-body">
     <h4 className="media-header">{author}</h4>
     <p>{text}</p>
-    { replies && replies.length > 0 &&
+    { replies.length > 0 && console.log('replies', replies) &&
       <div class="media">
-      {replies.map(comment => {
-        <Comment {...comment} />
-      })}
+      {replies.map( (comment,index) =>
+        <NestedComment key={comment._id} id={comment._id } author={comment.author} text={comment.text} canReply={false} />
+      )}
       </div>
     }
-    { canReply && <AddComment onAdd={(comment) => console.log('add a reply', Object.assign(comment, { ancestors: ancestors })) }/> }
+    { canReply && <AddComment onAdd={(comment) => addComment(makeComment(comment, author, ancestors)) }/> }
     </div>
     </li>
   );
 }
 
-export default Comment;
+const mapStateToProps = (state) => {
+  return {
+    author: state.users.username,
+    comments: state.scenario.comments
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addComment: (comment) => dispatch(onNewComment(comment))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Comment);

@@ -4,6 +4,16 @@
         "to": "index.html"
     },
     {
+        "from": "api/scenario/:scenarioid",
+        "to": "../../:scenarioid",
+        "method": "PUT"
+    },
+    {
+        "from": "api/scenario/",
+        "to": "../../",
+        "method": "PUT"
+    },
+    {
         "from": "/api/scenario/:scenarioid",
         "to": "/_view/scenario/",
         "query": {
@@ -18,6 +28,6 @@
     },
     {
         "from": "/*",
-        "to": "/*"
+        "to": "../../*"
     }
 ]

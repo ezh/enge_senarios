@@ -1,10 +1,19 @@
 import axios from 'axios';
 import { Entity } from 'draft-js';
 
-import { base_url } from '../config'
+import { base_url, host } from '../config'
 
 const SCENARIO_TYPE = 'scenario';
 const COMMENT_TYPE = 'comment';
+
+export const slugify = (text) => {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+}
 
 export const getDateArray = (date) => {
   console.log('get Date array', date)
@@ -12,19 +21,23 @@ export const getDateArray = (date) => {
 }
 
 export function getScenarios(){
-  return axios.get(`${base_url}/scenario_list`);
+  return axios.get(`${base_url}/scenario_list`, {
+    headers: { 'Host': host, 'Content-Type': 'application/json' }
+  });
 }
 
 export function getScenario(id){
-  return axios.get(`${base_url}/scenario/${id}`)
+  return axios.get(`${base_url}/scenario/${id}`, {
+    headers: { 'Host': host, 'Content-Type': 'application/json', 'Origin': host }
+  })
     .then((response) => {
       return response.data;
     });
 }
 
 export function putScenario(id, data) {
-  return axios.put(`${base_url}/enge_scenarios/${id}`, data, {
-    headers: { 'Host': 'localhost', 'Content-Type': 'application/json' }
+  return axios.put(`${base_url}/scenario/${id}`, data, {
+    headers: { 'Host': host, 'Content-Type': 'application/json' }
   });
 }
 
@@ -33,10 +46,10 @@ export function deleteScenario(id, rev) {
     method: 'delete',
     url: `${base_url}/enge_scenarios/${id}`,
     data: { '_rev': rev },
-    headers: { 'Host': 'localhost', 'Content-Type': 'application/json' }
+    headers: { 'Host': host, 'Content-Type': 'application/json' }
   });
   return axios.delete(`${base_url}/enge_scenarios/${id}`, {
-    headers: { 'Host': 'localhost', 'Content-Type': 'application/json' },
+    headers: { 'Host': host, 'Content-Type': 'application/json' },
     data: { '_rev': rev }
   });
 }
@@ -52,11 +65,25 @@ export const postComment = (data) => {
 }
 
 function _postData(data, type) {
-  const _data = Object.assign({}, data, {
-    type: type
-  });
-  return axios.post(`${base_url}/enge_scenarios/`, _data, {
-    headers: { 'Host': 'localhost', 'Content-Type': 'application/json' }
+  let meta = { type: type };
+  let _id = '';
+  if (!data._id) {
+    switch(type) {
+      case "scenario":
+        _id = slugify(data.title + '_' + data.author + '_' + Date.now());
+        break;
+      case "comment":
+        _id = slugify(data.ancestors.join('_') + data.author + '_' + Date.now());
+        break;
+      default:
+        _id = Date.now();
+    }
+    meta._id = _id;
+  }
+
+  const _data = Object.assign({}, data, meta);
+  return axios.put(`${base_url}/scenario/${_data._id}`, _data, {
+    headers: { 'Host': host, 'Content-Type': 'application/json' }
   });
 }
 
