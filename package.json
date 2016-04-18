@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "a prototype interface for designing engineering scenarios",
   "main": "index.js",
+  "repository": "https://github.com/hazybluedot/enge_senarios",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
