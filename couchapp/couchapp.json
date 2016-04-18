@@ -1,0 +1,11 @@
+{
+"manifest": [
+            "views/",
+            "views/scenario_list",
+            "views/scenario_list/map.js",
+            "views/scenario",
+            "views/scenario/map.js",
+            "rewrites.js"
+],
+"name": "Engineering Scneario Editor"
+}
