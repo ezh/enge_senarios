@@ -5,7 +5,7 @@
             "views/scenario_list/map.js",
             "views/scenario",
             "views/scenario/map.js",
-            "rewrites.js"
+            "rewrites.json"
 ],
 "name": "Engineering Scneario Editor"
 }
