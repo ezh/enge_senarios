@@ -8,6 +8,11 @@ const base_url = 'http://' + hostname + ':' + port;
 const SCENARIO_TYPE = 'scenario';
 const COMMENT_TYPE = 'comment';
 
+export const getDateArray = (date) => {
+  console.log('get Date array', date)
+  return [ date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds() ]
+}
+
 export function getScenarios(){
   return axios.get(`${base_url}/enge_scenarios/_design/scenarios/_view/scenario_list`);
 }

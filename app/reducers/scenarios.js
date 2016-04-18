@@ -7,7 +7,9 @@ export const scenario = (state = {
   switch(action.type) {
     case REQUEST_SCENARIO:
       return Object.assign({}, state, {
-        isFetching: true
+        isFetching: true,
+        scenario: {},
+        comments: [],
       });
 
       break;

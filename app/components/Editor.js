@@ -4,12 +4,14 @@ import { Entity } from 'draft-js';
 
 import DisplayEditor from './DisplayEditor';
 import Comments from './Comments';
+import CommentList from './CommentList';
 
 import { connect } from 'react-redux'
 import { updateScenario, fetchScenario } from '../actions/scenarios'
 import { entityChange } from '../actions/editor'
 import { onNewComment } from '../actions/comments'
 
+import { getDateArray } from '../utils/helpers'
 
 class Editor extends React.Component{
   constructor(props) {
@@ -36,11 +38,11 @@ class Editor extends React.Component{
   _handleAddComment(text) {
     const { scenario, username, editor, addComment } = this.props;
     const comment = {
-      parent_id: scenario._id,
+      ancestors: [ scenario._id ],
       entitykey: editor.selectedEntity,
       author: username,
       text: text,
-      createdAt: Date.now()
+      created_at: getDateArray(new Date())
     }
     addComment(comment);
   }
@@ -63,6 +65,7 @@ class Editor extends React.Component{
       <div className="row">
       <div className="col-md-8">
       Aggregate
+      <CommentList readOnly={true} comments={comments} />
       </div>
       </div>
       </div>
@@ -74,7 +77,8 @@ function mapStateToProps(state) {
   return {
     username: state.users.username,
     scenario: state.scenario.scenario,
-    editor: state.editor
+    editor: state.editor,
+    comments: (state.scenario.comments ? state.scenario.comments : [])
   };
 }
 

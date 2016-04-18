@@ -1,4 +1,4 @@
-import helpers from '../utils/helpers'
+import helpers, { getDateArray } from '../utils/helpers'
 
 export const ADD_SCENARIO = 'ADD_SCENARIO';
 export const SAVE_SCENARIO = 'SAVE_SCENARIO';
@@ -22,7 +22,7 @@ export function addScenario(username, scenario) {
     const data = {
       author: username,
       title: scenario,
-      createdAt: Date.now(),
+      created_at: getDateArray(new Date()),
     };
     // dispatch(saving...)
     console.log('dispatch post scenario', data);
@@ -80,7 +80,7 @@ export function updateRevision(id, rev) {
     type: UPDATE_REVISION,
     id: id,
     rev: rev,
-    updatedAt: Date.now()
+    updated_at: getDateArray(new Date())
   }
 }
 
@@ -88,7 +88,7 @@ export function receiveScenarios(json) {
   return {
     type: RECEIVE_SCENARIOS,
     scenarios: json.data.rows.map(child => child.value),
-    receivedAt: Date.now()
+    received_at: getDateArray(new Date())
   }
 }
 

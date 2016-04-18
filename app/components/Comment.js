@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 import AddComment from '../containers/AddComment'
 
-const Comment = ({author, text, replies}) => {
+const Comment = ({author, text, replies, ancestors, canReply }) => {
   return (
     <li className="media">
     <div className="media-left">
@@ -18,7 +18,7 @@ const Comment = ({author, text, replies}) => {
       })}
       </div>
     }
-    Reply: <AddComment onAdd={(comment) => console.log('add a reply', comment) }/>
+    { canReply && <AddComment onAdd={(comment) => console.log('add a reply', Object.assign(comment, { ancestors: ancestors })) }/> }
     </div>
     </li>
   );
