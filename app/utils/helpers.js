@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { Entity } from 'draft-js';
 
-const hostname = '127.0.0.1';
-const port = 5984;
-const base_url = 'http://' + hostname + ':' + port;
+import { base_url } from '../config'
 
 const SCENARIO_TYPE = 'scenario';
 const COMMENT_TYPE = 'comment';
@@ -14,11 +12,11 @@ export const getDateArray = (date) => {
 }
 
 export function getScenarios(){
-  return axios.get(`${base_url}/enge_scenarios/_design/scenarios/_view/scenario_list`);
+  return axios.get(`${base_url}/scenario_list`);
 }
 
 export function getScenario(id){
-  return axios.get(`${base_url}/enge_scenarios/_design/scenarios/_view/scenario?startkey=["${id}"]&endkey=["${id}",{}]&include_docs=true`)
+  return axios.get(`${base_url}/scenario/${id}`)
     .then((response) => {
       return response.data;
     });

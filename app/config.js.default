@@ -1,0 +1,5 @@
+const hostname = 'enge_scenario.couchdb';
+const port = 5984;
+const api_base = '/api';
+
+export const base_url = 'http://' + hostname + ':' + port + api_base;

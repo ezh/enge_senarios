@@ -4,11 +4,16 @@
         "to": "index.html"
     },
     {
-        "from": "api",
-        "to": "../../"
+        "from": "/api/scenario/:scenarioid",
+        "to": "/_view/scenario/",
+        "query": {
+                 "include_docs": "true",
+                 "startkey": [":scenarioid"],
+                 "endkey": [":scenarioid", {}]
+        }
     },
     {
-        "from": "api/*",
-        "to": "../../*"
+        "from": "api/scenario_list",
+        "to": "/_view/scenario_list"
     }
 ]
