@@ -9,9 +9,9 @@
         "method": "PUT"
     },
     {
-        "from": "api/scenario/",
-        "to": "../../",
-        "method": "PUT"
+        "from": "api/scenario/:scenarioid",
+        "to": "../../:scenarioid",
+        "method": "DELETE"
     },
     {
         "from": "/api/scenario/:scenarioid",
@@ -29,11 +29,11 @@
     {
         "from": "/bundle.js",
         "to": "/bundle.js",
-        "method": GET
+        "method": "GET"
     },
     {
         "from": "/Draft.css",
         "to": "/Draft.css",
-        "method": GET
+        "method": "GET"
     }
 ]

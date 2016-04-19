@@ -35,7 +35,8 @@ const TagBar = (props) => {
     return selectedTags.includes(tag);
   };
   return (
-    <div>
+    <div className="btn-toolbar" role="toolbar">
+    <div className="btn-group" role="group">
     {TAGS.map((tag,index) => <TagButton
       tag={tag}
       active={isActive(tag)}
@@ -44,6 +45,7 @@ const TagBar = (props) => {
       key={index}
       />
     )}
+    </div>
     </div>
   );
 }

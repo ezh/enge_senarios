@@ -4,7 +4,7 @@ let AddScenario = ({onAdd}) => {
   let input;
  
   return (
-    <div className="input-group">
+    <div className="input-group col-md-8">
     <input type="text" className="form-control" placeholder="Add new scenario" ref={node => {
       input = node
     }}/>
