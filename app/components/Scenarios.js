@@ -32,7 +32,11 @@ class Scenarios extends Component {
 
     return (
       <div>
-      <AddScenario onAdd={(scenario) => onAddScenario(username, scenario)} />
+      <div className="row">
+      <AddScenario author={username} onAdd={(scenario) => onAddScenario(username, scenario)} />
+      </div>
+      <div className="row">&nbsp;</div>
+      <div className="row">
       {isFetching && items.length === 0 &&
         <h2>Loading...</h2>
       }
@@ -40,6 +44,7 @@ class Scenarios extends Component {
         <h2>Empty...</h2>
       }
       <ScenarioList scenarios={items} onDelete={onDeleteScenario} />
+      </div>
       </div>
     );
   }
