@@ -15,14 +15,14 @@ const getCommentIds = (editor) => {
   return [];
 }
 
-const Comments = ({ comments, onAddComment, showAddComment }) => {
+const Comments = ({ comments, onAddComment, showAddComment, username }) => {
   console.log('Comments render', comments)
   return (
     <div>
     <h3>Comments</h3>
     <CommentList comments={comments}/>
     { showAddComment &&
-      <AddComment onAdd={onAddComment} />
+      <AddComment author={username} onAdd={onAddComment} />
     }
     </div>
   );
@@ -40,6 +40,7 @@ Comments.propTypes = {
 const mapStateToProps = (state) => {
   console.log('comments stateToProps state', state)
   return {
+    username: state.users.username,
     showAddComment: (state.editor.selectedEntity !== null),
     comments: (state.scenario.comments ? state.scenario.comments : []).filter(comment => comment.entitykey === state.editor.selectedEntity), //.filter((comment) => { getCommentIds(state.editor).includes(comment._id)}),
   };

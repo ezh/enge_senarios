@@ -39,7 +39,7 @@ const Comment = ({username, author, text, comments, ancestors, canReply, addComm
       )}
       </div>
     }
-    { canReply && <AddComment onAdd={(comment) => addComment(makeComment(comment, username, ancestors)) }/> }
+    { canReply && <AddComment author={username} onAdd={(comment) => addComment(makeComment(comment, username, ancestors)) }/> }
     </div>
     </li>
   );

@@ -1,11 +1,11 @@
 import React from 'react';
 
-let AddComment = ({onAdd}) => {
+let AddComment = ({onAdd, author}) => {
   let input;
   
   return (
     <div className="input-group">
-    <input type="text" className="form-control" placeholder="Comment text" ref={node => {
+    <input type="text" className="form-control" placeholder={`Comment as ${author}`} ref={node => {
       input = node
     }}/>
     <span className="input-group-btn">
