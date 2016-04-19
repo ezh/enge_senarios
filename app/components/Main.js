@@ -13,7 +13,7 @@ const Main = ({children}) => {
           </span>
          <span className="col-sm-7 col-sm-offset-6">
            <UserSelection />
-      </span>
+         </span>
       </div>
         </nav>
         <div className="container">
