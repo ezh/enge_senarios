@@ -26,14 +26,14 @@ const Comment = ({username, author, text, comments, ancestors, canReply, addComm
   const replies = comments.filter(comment => comment.ancestors.includes(id));
   return (
     <li className="media">
-    <div className="media-left">
-    AVATAR
+    <div className="media-left media-middle">
+    <span className="glyphicon glyphicon-user" aria-hidden="true"></span>
     </div>
     <div className="media-body">
     <h4 className="media-header">{author}</h4>
     <p>{text}</p>
     { replies.length > 0 && console.log('replies', replies) &&
-      <div class="media">
+      <div className="media">
       {replies.map( (comment,index) =>
         <NestedComment key={comment._id} id={comment._id } author={comment.author} text={comment.text} canReply={false} />
       )}
