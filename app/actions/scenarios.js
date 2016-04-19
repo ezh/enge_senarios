@@ -4,7 +4,6 @@ export const ADD_SCENARIO = 'ADD_SCENARIO';
 export const SAVE_SCENARIO = 'SAVE_SCENARIO';
 export const DELETE_SCENARIO = 'DELETE_SCENARIO';
 
-
 /* Async Actions */
 export const FETCH_SCENARIOS = 'FETCH_SCENARIOS';
 export const REQUEST_SCENARIOS = 'REQUEST_SCENARIOS';
@@ -16,22 +15,31 @@ export const RECEIVE_SCENARIO = 'RECEIVE_SCENARIO';
 export const UPDATE_REVISION = 'UPDATE_REVISION';
 
 import {setContent} from './editor'
+import {slugify} from '../utils/helpers'
 
 export function addScenario(username, scenario) {
   return function(dispatch) {
     const data = {
+      _id: slugify(scenario + '_' + username + '_' + Date.now()),
       author: username,
       title: scenario,
       created_at: getDateArray(new Date()),
     };
     // dispatch(saving...)
-    console.log('dispatch post scenario', data);
+    dispatch(insertScenario(data))
     helpers.postScenario(data).then(data => {
-      console.log('postScenario respone', data);
-      if (data.status === 201) {
-        dispatch(fetchScenarios());
+      if (data.status !== 201) {
+        alert('scenario note added', data);
+        //dispatch(fetchScenarios());
       }
     })
+  }
+}
+
+export function insertScenario(scenario) {
+  return {
+    type: ADD_SCENARIO,
+    payload: scenario
   }
 }
 
@@ -45,11 +53,14 @@ export function saveSenario(scenario) {
 export function deleteScenario(id, rev) {
   return function(dispatch) {
     helpers.deleteScenario(id, rev).then(response => {
-      if (data.status === 201) {
-        dispatch(fetchScenarios());
+      if (response.status === 200) {
+        dispatch(removeScenario(id))
       }
     });
   }
+}
+
+export function removeScenario(id) {
   return {
     type: DELETE_SCENARIO,
     id: id

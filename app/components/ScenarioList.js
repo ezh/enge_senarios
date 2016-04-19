@@ -4,10 +4,12 @@ import { Link } from 'react-router';
 
 const Scenario = ({ title, _id, author, onDeleteClick }) => {
   return (
-    <li className="list-group-item">
+    <li className='list-group-item row'>
+    <span className='col-md-8'>
     <Link to={`/scenario/${_id}`}>{title}</Link>
-    <span>{author}</span>
-    <span className='btn' onClick={onDeleteClick}>X</span>
+    </span>
+    <span className='col-md-2'>{author}</span>
+    <span className='btn col-md-2' onClick={onDeleteClick}>X</span>
     </li>
   )
 }

@@ -42,14 +42,13 @@ export function putScenario(id, data) {
 }
 
 export function deleteScenario(id, rev) {
-  return axios({
-    method: 'delete',
-    url: `${base_url}/enge_scenarios/${id}`,
-    data: { '_rev': rev },
-    headers: { 'Host': host, 'Content-Type': 'application/json' }
-  });
-  return axios.delete(`${base_url}/enge_scenarios/${id}`, {
-    headers: { 'Host': host, 'Content-Type': 'application/json' },
+  //return axios({
+  //  method: 'delete',
+  //  url: `${base_url}/enge_scenarios/${id}`,
+  //  headers: { 'Host': host, 'Content-Type': 'application/json', 'If-Match': rev }
+  //});
+  return axios.delete(`${base_url}/scenario/${id}`, {
+    headers: { 'Host': host, 'Content-Type': 'application/json', 'If-Match': rev },
     data: { '_rev': rev }
   });
 }

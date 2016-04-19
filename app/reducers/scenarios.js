@@ -95,6 +95,21 @@ export const scenarios = (state = {
         items: action.scenarios,
         lastUpdated: action.receivedAt
       });
+    case DELETE_SCENARIO:
+      const index = state.items.findIndex(scenario => scenario._id === action.id);
+      console.log('DELETE_SCENARIO', action, index)
+      return Object.assign({}, state, {
+        items: [ ...state.items.slice(0, index),
+          ...state.items.slice(index+1)
+        ]
+      });
+    case ADD_SCENARIO:
+      return Object.assign({}, state, {
+        items: [ ...state.items,
+          action.payload
+        ]
+      });
+      break;
     default:
       return state;
   }
