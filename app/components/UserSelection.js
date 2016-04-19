@@ -14,7 +14,7 @@ const User = ({username, full_name, onClick, active}) => {
 }
 const UserSelection = ({users, username, onClick}) => {
   return (
-    <ul>
+    <ul className="list-group">
     {users.map(user =>
       <User username={user.username} full_name={user.full_name} active={user.username === username} onClick={onClick} />
     )}
