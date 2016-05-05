@@ -12,20 +12,22 @@ class TagButton extends React.Component {
   }
 
   render() {
-    let className = 'btn';
+    let className = 'btn btn-icon';
     if (this.props.active) {
       className += ' btn-primary';
     }
 
     return (
-      <span className={className} onMouseDown={this.onToggle}>
-      {this.props.label}
-      </span>
+      <button className={className} onMouseDown={this.onToggle} aria-label={"tag selected text with " + this.props.label}>
+      <span className="glyphicon glyphicon-tags"></span>
+      &nbsp;
+      <span>{this.props.label}</span>
+      </button>
     );
   }
 }
 
-const TAGS = [ 'social', 'economic', 'technical' ];
+export const TAGS = [ 'social', 'economic', 'technical', 'environmental', 'ethical' ];
 
 
 const TagBar = (props) => {

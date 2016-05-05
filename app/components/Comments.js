@@ -15,12 +15,12 @@ const getCommentIds = (editor) => {
   return [];
 }
 
-const Comments = ({ comments, onAddComment, showAddComment, username }) => {
+const Comments = ({ comments, onAddComment, showAddComment, username, showStickers }) => {
   console.log('Comments render', comments)
   return (
     <div>
     <h3>Comments</h3>
-    <CommentList comments={comments}/>
+    <CommentList comments={comments} showStickers={showStickers} />
     { showAddComment &&
       <AddComment author={username} onAdd={onAddComment} />
     }

@@ -1,6 +1,6 @@
 import { SELECT_USER } from '../actions/users';
 
-const initial_users = [
+export const initial_users = [
   {
     username: 'dmaczka',
     full_name: 'Darren M.'
@@ -8,6 +8,10 @@ const initial_users = [
   {
     username: 'jmorlock',
     full_name: 'John M.',
+  },
+  {
+    username: 'champton',
+    full_name: 'Cynthia H.'
   },
   {
     username: 'dtatar',

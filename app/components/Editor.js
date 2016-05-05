@@ -5,6 +5,7 @@ import { Entity } from 'draft-js';
 import DisplayEditor from './DisplayEditor';
 import Comments from './Comments';
 import CommentList from './CommentList';
+import AggregateComments from '../containers/AggregateComments'
 
 import { connect } from 'react-redux'
 import { updateScenario, fetchScenario } from '../actions/scenarios'
@@ -53,21 +54,30 @@ class Editor extends React.Component{
 
     return (
       <div>
-      <div className="row">
-      <div className="col-md-8">
-      <h3>{scenario.title}</h3>
-      <DisplayEditor editor={editor} scenario={scenario} selectedEntity={editor.selectedEntity} comments={comments} saveContent={this.handleSaveContent} onChange={onChange} />
-      </div>
-      <div className="col-md-4">
-      <Comments onAddComment={this.handleAddComment} />
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-md-8">
-      Aggregate
-      <CommentList readOnly={true} comments={comments} />
-      </div>
-      </div>
+        <div className="row">
+          <div className="col-md-8">
+            <div className="row">
+              <h3>{scenario.title}</h3>
+              <DisplayEditor editor={editor} scenario={scenario} selectedEntity={editor.selectedEntity} comments={comments} saveContent={this.handleSaveContent} onChange={onChange} />
+            </div>
+            <div className="row">
+              <div role="group">
+              <h4>Previous revisions</h4>
+              <div className="btn-group" role="group">
+              <a className="btn btn-default">Rev 1</a>
+              <a className="btn btn-default">Rev 2</a>
+              <a className="btn btn-default">Rev 3</a>
+              </div>
+              </div>
+            </div>
+            <div className="row">
+              <AggregateComments />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <Comments onAddComment={this.handleAddComment} showStickers={true} />
+          </div>
+        </div>
       </div>
     );
   }

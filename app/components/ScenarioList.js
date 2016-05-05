@@ -9,7 +9,7 @@ const Scenario = ({ title, _id, author, onDeleteClick }) => {
     <Link to={`/scenario/${_id}`}>{title}</Link>
     </span>
     <span className='col-md-2'>{author}</span>
-    <span className='btn col-md-2' onClick={onDeleteClick}>X</span>
+    <span className="col-md-2"><a className='btn' onClick={onDeleteClick}><span className="glyphicon glyphicon-remove"></span></a></span>
     </li>
   )
 }

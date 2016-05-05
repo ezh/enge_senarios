@@ -15,7 +15,7 @@ const styles = {
     padding: '2px 0',
   },
   highlight: {
-    backgroundColor: 'rgba(248,122,222,1.0)',
+    //backgroundColor: 'rgba(204,122,222,1.0)',
     padding: '2px 0',
   }
 };
@@ -23,9 +23,9 @@ const styles = {
 export const Highlight = (props) => {
   const style = styles.highlight;
   return (
-    <span {...props} style={style}>
+    <mark {...props} style={style} className="bg-info">
     {props.children}
-    </span>
+    </mark>
   );
 };
 
